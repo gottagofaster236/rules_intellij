@@ -67,7 +67,7 @@ bazel_dep(name = "rules_jvm_external", version = "6.0")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(
-    name = "maven",
+    name = "rules_intellij_maven",
     artifacts = [
         "com.google.errorprone:error_prone_annotations:2.20.0",
     ],
@@ -77,7 +77,7 @@ maven.install(
 )
 use_repo(
     maven,
-    "maven",
+    "rules_intellij_maven",
     error_prone_annotations = "com_google_errorprone_error_prone_annotations",
 )
 

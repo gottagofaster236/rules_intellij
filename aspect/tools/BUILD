@@ -76,7 +76,7 @@ java_test(
     test_class = "com.google.idea.blaze.aspect.PackageParserTest",
     deps = [
         ":test_lib",
-        "@error_prone_annotations//jar",
+        "@rules_intellij_maven//:com_google_errorprone_error_prone_annotations",
     ],
 )
 
