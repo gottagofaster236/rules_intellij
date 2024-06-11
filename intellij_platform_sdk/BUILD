@@ -798,7 +798,7 @@ java_library(
 java_library(
     name = "test_libs",
     testonly = 1,
-    visibility = [":test_libs_visibility"],
+    visibility = ["//visibility:public"],
     exports = [
         "//third_party:truth",
         "@bytebuddy_agent//jar",
