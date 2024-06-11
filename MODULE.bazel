@@ -106,3 +106,105 @@ http_archive(
     sha256 = IC_242_SHA,
     url = IC_242_URL,
 )
+
+DEVKIT_BUILD_FILE = """
+java_import(
+    name = "devkit",
+    jars = ["devkit/lib/devkit.jar"],
+    visibility = ["//visibility:public"],
+)
+"""
+
+DEVKIT_241_SHA = "7fbabd16a4b8b66de40a3fac80ea927dc44c1f5234b829b5dfb082f0b8de4cc2"
+
+DEVKIT_241_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/DevKit/241.17011.92/DevKit-241.17011.92.zip"
+
+http_archive(
+    name = "devkit_2024_1",
+    build_file_content = DEVKIT_BUILD_FILE,
+    sha256 = DEVKIT_241_SHA,
+    url = DEVKIT_241_URL,
+)
+
+DEVKIT_242_SHA = "e6eb3d2409581f74dda654db30003f98c7913a17887ee9caf3aa7d551ed0a354"
+
+DEVKIT_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/DevKit/242.12881.66/DevKit-242.12881.66.zip"
+
+http_archive(
+    name = "devkit_2024_2",
+    build_file_content = DEVKIT_BUILD_FILE,
+    sha256 = DEVKIT_242_SHA,
+    url = DEVKIT_242_URL,
+)
+
+_PYTHON_CE_BUILD_FILE = """
+java_import(
+    name = "python",
+    jars = ["python-ce/lib/python-ce.jar"],
+    visibility = ["//visibility:public"],
+)
+filegroup(
+  name = "python_helpers",
+  srcs = glob(["python-ce/helpers/**/*"]),
+  visibility = ["//visibility:public"],
+)
+"""
+
+PYTHON_PLUGIN_241_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/PythonCore/241.17011.48/PythonCore-241.17011.48.zip"
+
+PYTHON_PLUGIN_241_SHA = "f0d1a93979a9aa650250ee46d3b21038f7b37c2c02f17ab879fc188c29a54592"
+
+http_archive(
+    name = "python_2024_1",
+    build_file_content = _PYTHON_CE_BUILD_FILE,
+    sha256 = PYTHON_PLUGIN_241_SHA,
+    url = PYTHON_PLUGIN_241_URL,
+)
+
+_PYTHON_CE_242_BUILD_FILE = """
+java_import(
+    name = "python",
+    jars = glob(["python-ce/lib/*.jar", "python-ce/lib/modules/*.jar"]),
+    visibility = ["//visibility:public"],
+)
+filegroup(
+  name = "python_helpers",
+  srcs = glob(["python-ce/helpers/**/*"]),
+  visibility = ["//visibility:public"],
+)
+"""
+
+PYTHON_PLUGIN_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/PythonCore/242.12881.66/PythonCore-242.12881.66.zip"
+
+PYTHON_PLUGIN_242_SHA = "297463c5f43ff2e4410e071ff469a7d4a80e6a961bf6d4c7578a7065906c8181"
+
+http_archive(
+    name = "python_2024_2",
+    build_file_content = _PYTHON_CE_242_BUILD_FILE,
+    sha256 = PYTHON_PLUGIN_242_SHA,
+    url = PYTHON_PLUGIN_242_URL,
+)
+
+_ANDRIOD_PLUGIN_BUILD_FILE = """
+java_import(
+    name = "android",
+    jars = glob(["android/lib/*.jar"]),
+    visibility = ["//visibility:public"],
+)
+"""
+
+ANDROID_PLUGIN_241_URL = "https://downloads.marketplace.jetbrains.com/files/22989/544295/android-241.17011.79.zip"
+
+http_archive(
+    name = "android_2024_1",
+    build_file_content = _ANDRIOD_PLUGIN_BUILD_FILE,
+    url = ANDROID_PLUGIN_241_URL,
+)
+
+ANDROID_PLUGIN_242_URL = "https://downloads.marketplace.jetbrains.com/files/22989/553177/android-242.15523.18.zip"
+
+http_archive(
+    name = "android_2024_2",
+    build_file_content = _ANDRIOD_PLUGIN_BUILD_FILE,
+    url = ANDROID_PLUGIN_242_URL,
+)

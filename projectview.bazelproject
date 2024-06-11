@@ -19,5 +19,3 @@ build_flags:
 test_sources:
   */tests/unittests*
   */tests/integrationtests*
-
-import_depth: -1
