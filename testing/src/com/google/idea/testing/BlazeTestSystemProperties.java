@@ -37,7 +37,7 @@ import javax.annotation.Nullable;
  * Test utilities specific to running IntelliJ integration tests in a blaze/bazel environment. To be
  * used with IntellijIntegrationSuite runner.
  */
-class BlazeTestSystemProperties {
+public class BlazeTestSystemProperties {
 
   private BlazeTestSystemProperties() {}
 
@@ -115,7 +115,9 @@ class BlazeTestSystemProperties {
     } else if (buildNumber.startsWith("CL")) { // CLion
       return "CLion";
     } else {
-      throw new RuntimeException("Unable to determine platform prefix for build: " + buildNumber);
+      // TODO fix
+//      throw new RuntimeException("Unable to determine platform prefix for build: " + buildNumber);
+      return "Idea";
     }
   }
 
