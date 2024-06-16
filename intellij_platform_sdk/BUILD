@@ -766,6 +766,12 @@ java_library(
             ":platform_images",
         ],
     ),
+    data = [":application_info_json", ":bin"]
+)
+
+filegroup(
+    name = "bin",
+    srcs = glob(["bin/**"]),
 )
 
 # The outward facing plugin api

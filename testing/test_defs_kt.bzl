@@ -14,6 +14,7 @@ ADD_OPENS = [
         # keep sorted
         "java.base/java.io",
         "java.base/java.lang",
+        "java.base/java.nio",
         "java.base/java.util",
         "java.base/java.util.concurrent",
         "java.base/jdk.internal.vm",
@@ -248,11 +249,6 @@ def intellij_integration_test_suite(
     ])
 
     resources = kwargs.pop("resources", [])
-    # write
-    # com.intellij.testFramework.junit5.impl.UncaughtExceptionExtension
-    # com.intellij.testFramework.junit5.impl.ThreadLeakTrackerExtension
-    # com.intellij.testFramework.junit5.impl.SwingTimerWatcherExtension
-    # to test/resources/META-INF/services/org.junit.jupiter.api.extension.Extension
 
     native.genrule(
         name = name + "_test_extension",
@@ -263,20 +259,18 @@ def intellij_integration_test_suite(
         echo "com.intellij.testFramework.junit5.impl.SwingTimerWatcherExtension" >> $@
         """,
     )
-#    resources.append(name + "_test_extension")
-
-    # write
-    # com.intellij.testFramework.junit5.impl.JUnit5TestEnvironmentInitializer
-    # to org.junit.platform.launcher.LauncherSessionListener
+    resources.append(name + "_test_extension")
 
     native.genrule(
         name = name + "_test_environment_initializer",
         outs = ["test/resources/META-INF/services/org.junit.platform.launcher.LauncherSessionListener"],
         cmd = """
         echo "com.intellij.testFramework.junit5.impl.JUnit5TestEnvironmentInitializer" > $@
+        echo "com.intellij.tests.JUnit5TestSessionListener" >> $@
+        echo "com.intellij.tests.JUnit5OutOfProcessRetrySessionListener" >> $@
         """,
     )
-#    resources.append(name + "_test_environment_initializer")
+    resources.append(name + "_test_environment_initializer")
 
     prefs_name = name + "_prefs"
 
@@ -291,9 +285,9 @@ def intellij_integration_test_suite(
     jvm_flags.extend([
         "-Didea.classpath.index.enabled=false",
         "-Djava.awt.headless=true",
-#        "-Djunit.jupiter.extensions.autodetection.enabled=true",
-#        "-Djava.util.prefs.userRoot=$(location %s)" % prefs_name,
-#        "-Didea.define.class.using.byte.array=false",
+        "-Djunit.jupiter.extensions.autodetection.enabled=true",
+        "-Djava.util.prefs.userRoot=$(location %s)" % prefs_name,
+        "-Didea.force.use.core.classloader=true",
         "-Djava.system.class.loader=com.intellij.util.lang.PathClassLoader",
         "-Dblaze.idea.api.version.file=$(location %s)" % api_version_txt_name,
     ])
