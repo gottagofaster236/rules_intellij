@@ -164,6 +164,7 @@ use_repo(
 )
 
 http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_jar = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_jar")
 
 # The plugin api for intellij_ce_2024_1. This is required to build IJwB and run integration tests.
 IC_241_SHA = "456805da1a95f98b8bd7b26ee2b49705ef1656598d438889ee4cc18099e87928"
@@ -289,4 +290,18 @@ http_archive(
     name = "android_2024_2",
     build_file_content = _ANDRIOD_PLUGIN_BUILD_FILE,
     url = ANDROID_PLUGIN_242_URL,
+)
+
+PERFORMANCE_PLUGIN_241_URL = "https://www.jetbrains.com/intellij-repository/releases/com/jetbrains/intellij/performanceTesting/performance-testing/241.17890.14/performance-testing-241.17890.14.jar"
+
+http_jar(
+    name = "performance_2024_1",
+    url = PERFORMANCE_PLUGIN_241_URL,
+)
+
+PERFORMANCE_PLUGIN_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/performanceTesting/performance-testing/242.18071-EAP-CANDIDATE-SNAPSHOT/performance-testing-242.18071-EAP-CANDIDATE-SNAPSHOT.jar"
+
+http_jar(
+    name = "performance_2024_2",
+    url = PERFORMANCE_PLUGIN_242_URL,
 )

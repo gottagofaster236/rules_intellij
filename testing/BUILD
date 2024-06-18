@@ -184,8 +184,6 @@ java_library(
         "@rules_intellij_maven//:org_junit_platform_junit_platform_console",
         "@rules_intellij_maven//:org_junit_platform_junit_platform_suite_engine",
         "@rules_intellij_maven//:org_junit_platform_junit_platform_suite_api",
-        #        "@com_google_guava_guava//jar",
-        #        "@junit//jar",
     ],
 )
 

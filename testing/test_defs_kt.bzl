@@ -55,7 +55,6 @@ def _generate_test_suite_impl(ctx):
     for test_class in test_classes:
         lines.append("import %s;" % test_class)
     lines.append("")
-#    lines.append("@ExtendWith(%s.class)" % ctx.attr.run_with)
     lines.append("@Suite")
     lines.append("@SelectClasses({")
     for test_class in test_classes:
@@ -129,14 +128,12 @@ def intellij_unit_test_suite(
         "@maven//:org_junit_platform_junit_platform_console",
         "@maven//:org_junit_platform_junit_platform_suite_engine",
         "@maven//:org_junit_platform_junit_platform_suite_api",
-#        "@rules_intellij//intellij_platform_sdk:plugin_api_for_tests", # todo ??
     ])
 
     jvm_flags = list(kwargs.pop("jvm_flags", []))
     jvm_flags.extend([
         "-Didea.classpath.index.enabled=false",
         "-Djava.awt.headless=true",
-#        "-Djava.system.class.loader=com.intellij.util.lang.PathClassLoader",
         "-Dblaze.idea.api.version.file=$(location %s)" % api_version_txt_name,
     ])
     jvm_flags.extend(ADD_OPENS)
@@ -233,6 +230,7 @@ def intellij_integration_test_suite(
     deps = list(deps)
     deps.extend([
         "@rules_intellij//testing:lib",
+        "@rules_intellij//intellij_platform_sdk:plugin_api_for_tests",
         "@maven//:org_junit_jupiter_junit_jupiter",
         "@maven//:org_junit_jupiter_junit_jupiter_engine",
         "@maven//:org_junit_platform_junit_platform_console",
@@ -249,28 +247,6 @@ def intellij_integration_test_suite(
     ])
 
     resources = kwargs.pop("resources", [])
-
-    native.genrule(
-        name = name + "_test_extension",
-        outs = ["test/resources/META-INF/services/org.junit.jupiter.api.extension.Extension"],
-        cmd = """
-        echo "com.intellij.testFramework.junit5.impl.UncaughtExceptionExtension" > $@
-        echo "com.intellij.testFramework.junit5.impl.ThreadLeakTrackerExtension" >> $@
-        echo "com.intellij.testFramework.junit5.impl.SwingTimerWatcherExtension" >> $@
-        """,
-    )
-    resources.append(name + "_test_extension")
-
-    native.genrule(
-        name = name + "_test_environment_initializer",
-        outs = ["test/resources/META-INF/services/org.junit.platform.launcher.LauncherSessionListener"],
-        cmd = """
-        echo "com.intellij.testFramework.junit5.impl.JUnit5TestEnvironmentInitializer" > $@
-        echo "com.intellij.tests.JUnit5TestSessionListener" >> $@
-        echo "com.intellij.tests.JUnit5OutOfProcessRetrySessionListener" >> $@
-        """,
-    )
-    resources.append(name + "_test_environment_initializer")
 
     prefs_name = name + "_prefs"
 
@@ -296,39 +272,25 @@ def intellij_integration_test_suite(
     if required_plugins:
         jvm_flags.append("-Didea.required.plugins.id=" + required_plugins)
 
-    tags = kwargs.pop("tags", [])
-    tags.append("notsan")
-
-    # Workaround for b/233717538: Some protoeditor related code assumes that
-    # classPathLoader.getResource("include") works if there are files somewhere in include/...
-    # in the classpath. However, that is not true with the default loader.
-    # This is fixed in https://github.com/JetBrains/intellij-plugins/commit/dd6c17e27194e8adafde5d3f31950fc5bf40f6c6.
-    # #api221: Remove this workaround.
-    native.genrule(
-        name = name + "_protoeditor_resource_fix",
-        outs = [name + "_protoeditor_resource_fix/include/empty.txt"],
-        cmd = "echo > $@",
-    )
+    main_class = kwargs.pop("main_class", "org.junit.platform.console.ConsoleLauncher")
 
     args = kwargs.pop("args", [])
-    args.append("--main_advice_classpath=./%s/%s_protoeditor_resource_fix" % (native.package_name(), name))
     args.append("--select-class=" + test_package_root + "." + suite_class_name)
     args.append("--fail-if-no-tests")
     args.append("-e")
     args.append("junit-platform-suite")
-    data.append(name + "_protoeditor_resource_fix")
     kt_jvm_test(
         name = name,
         size = size,
         srcs = srcs + [suite_class_name],
         data = data,
-        tags = tags,
         args = args,
         resources = resources,
         jvm_flags = jvm_flags,
         test_class = suite_class,
         runtime_deps = runtime_deps,
         deps = deps,
+        main_class = main_class,
         **kwargs
     )
 
