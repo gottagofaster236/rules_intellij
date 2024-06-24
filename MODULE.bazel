@@ -5,20 +5,15 @@ module(
 
 bazel_dep(
     name = "platforms",
-    version = "0.0.8",
+    version = "0.0.10",
 )
 bazel_dep(
     name = "rules_java",
-    version = "7.4.0",
+    version = "7.6.5",
 )
 bazel_dep(
     name = "rules_python",
-    version = "0.31.0",
-)
-
-bazel_dep(
-    name = "rules_kotlin",
-    version = "1.9.5",
+    version = "0.33.2",
 )
 
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
@@ -27,6 +22,11 @@ python.toolchain(
     python_version = "3.12",
 )
 use_repo(python, "python_3_12", "python_versions")
+
+bazel_dep(
+    name = "rules_kotlin",
+    version = "1.9.5",
+)
 
 bazel_dep(
     name = "rules_proto",
@@ -39,33 +39,7 @@ bazel_dep(
 )
 bazel_dep(
     name = "bazel_skylib",
-    version = "1.5.0",
-)
-
-remote_android_extensions = use_extension("@bazel_tools//tools/android:android_extensions.bzl", "remote_android_tools_extensions")
-use_repo(remote_android_extensions, "android_gmaven_r8", "android_tools")
-
-bazel_dep(
-    name = "rules_bazel_integration_test",
-    version = "0.23.0",
-    dev_dependency = True,
-)
-
-bazel_binaries = use_extension(
-    "@rules_bazel_integration_test//:extensions.bzl",
-    "bazel_binaries",
-    dev_dependency = True,
-)
-bazel_binaries.download(version = "5.4.1")
-bazel_binaries.download(version = "6.5.0")
-bazel_binaries.download(version = "7.0.2")
-use_repo(
-    bazel_binaries,
-    "bazel_binaries",
-    "bazel_binaries_bazelisk",
-    "build_bazel_bazel_5_4_1",
-    "build_bazel_bazel_6_5_0",
-    "build_bazel_bazel_7_0_2",
+    version = "1.6.1",
 )
 
 bazel_dep(name = "rules_jvm_external", version = "6.1")
@@ -181,12 +155,12 @@ http_archive(
 # The plugin api for intellij_ce_2024_2. This is required to build IJwB and run integration tests.
 IC_242_SHA = "a20df4b2fb9c96a2943db019807d9e0da57c0db28544cbd7dbb3c40818e2bbfd"
 
-IC_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/idea/ideaIC/242.12881.66-EAP-SNAPSHOT/ideaIC-242.12881.66-EAP-SNAPSHOT.zip"
+IC_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/idea/ideaIC/242.18071-EAP-CANDIDATE-SNAPSHOT/ideaIC-242.18071-EAP-CANDIDATE-SNAPSHOT.zip"
 
 http_archive(
     name = "intellij_ce_2024_2",
     build_file = "@rules_intellij//intellij_platform_sdk:BUILD.idea242",
-    sha256 = IC_242_SHA,
+#    sha256 = IC_242_SHA,
     url = IC_242_URL,
 )
 
