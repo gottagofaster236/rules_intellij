@@ -194,14 +194,14 @@ def intellij_integration_test_suite(
 
     deps = list(deps)
     deps.extend([
-        "//testing:lib",
+        "@rules_intellij//testing:lib",
         # Usually, we'd get this from the JetBrains SDK, but the bundled one not aware of Bazel platforms,
         # so it fails on certain setups.
         "@jna//jar",
     ])
     runtime_deps = list(runtime_deps)
     runtime_deps.extend([
-        "//intellij_platform_sdk:bundled_plugins",
+        "@rules_intellij//intellij_platform_sdk:bundled_plugins",
     ])
 
     jvm_flags = list(jvm_flags)
