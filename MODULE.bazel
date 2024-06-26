@@ -183,14 +183,14 @@ http_archive(
     url = DEVKIT_241_URL,
 )
 
-DEVKIT_242_SHA = "e6eb3d2409581f74dda654db30003f98c7913a17887ee9caf3aa7d551ed0a354"
+#DEVKIT_242_SHA = "e6eb3d2409581f74dda654db30003f98c7913a17887ee9caf3aa7d551ed0a354"
 
-DEVKIT_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/DevKit/242.12881.66/DevKit-242.12881.66.zip"
+DEVKIT_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/DevKit/242.18071.24/DevKit-242.18071.24.zip"
 
 http_archive(
     name = "devkit_2024_2",
     build_file_content = DEVKIT_BUILD_FILE,
-    sha256 = DEVKIT_242_SHA,
+#    sha256 = DEVKIT_242_SHA,
     url = DEVKIT_242_URL,
 )
 
@@ -231,14 +231,15 @@ filegroup(
 )
 """
 
-PYTHON_PLUGIN_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/PythonCore/242.12881.66/PythonCore-242.12881.66.zip"
+PYTHON_PLUGIN_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/PythonCore/242.18071.24/PythonCore-242.18071.24.zip"
 
-PYTHON_PLUGIN_242_SHA = "297463c5f43ff2e4410e071ff469a7d4a80e6a961bf6d4c7578a7065906c8181"
+#PYTHON_PLUGIN_242_SHA = "297463c5f43ff2e4410e071ff469a7d4a80e6a961bf6d4c7578a7065906c8181"
 
 http_archive(
     name = "python_2024_2",
     build_file_content = _PYTHON_CE_242_BUILD_FILE,
-    sha256 = PYTHON_PLUGIN_242_SHA,
+    integrity = "sha256-UfD6t+/83M9ftyZ5KqqUK0UcOuwkpy93pqNgyuahgW8=",
+#    sha256 = PYTHON_PLUGIN_242_SHA,
     url = PYTHON_PLUGIN_242_URL,
 )
 
@@ -258,11 +259,12 @@ http_archive(
     url = ANDROID_PLUGIN_241_URL,
 )
 
-ANDROID_PLUGIN_242_URL = "https://downloads.marketplace.jetbrains.com/files/22989/553177/android-242.15523.18.zip"
+ANDROID_PLUGIN_242_URL = "https://downloads.marketplace.jetbrains.com/files/22989/559575/android-242.18071.24.zip"
 
 http_archive(
     name = "android_2024_2",
     build_file_content = _ANDRIOD_PLUGIN_BUILD_FILE,
+    integrity = "sha256-V6Aw4Ozx4DcRJ+iGqxvGneRoXY0ldgKLTe47/xtI6qw=",
     url = ANDROID_PLUGIN_242_URL,
 )
 

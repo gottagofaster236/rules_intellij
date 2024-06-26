@@ -11,7 +11,6 @@ public class IntellijJunit5TestExecutionListener implements TestExecutionListene
     public void testPlanExecutionStarted(TestPlan testPlan) {
         if (!isExecuted) {
             isExecuted = true;
-            System.out.println("IntellijJunit5TestExecutionListener.testPlanExecutionStarted");
             BlazeTestSystemProperties.configureSystemProperties();
         }
     }

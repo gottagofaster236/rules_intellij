@@ -91,9 +91,7 @@ public class BlazeTestSystemProperties {
     try {
       Enumeration<URL> urls =
           BlazeTestSystemProperties.class.getClassLoader().getResources("META-INF/plugin.xml");
-      System.out.println("Found plugin.xml resources: " + urls.hasMoreElements());
       while (urls.hasMoreElements()) {
-        System.out.println("Adding plugin jar: " + urls.nextElement());
         URL url = urls.nextElement();
         addArchiveFile(url, pluginJars);
       }
