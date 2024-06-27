@@ -155,7 +155,7 @@ http_archive(
 # The plugin api for intellij_ce_2024_2. This is required to build IJwB and run integration tests.
 IC_242_SHA = "a20df4b2fb9c96a2943db019807d9e0da57c0db28544cbd7dbb3c40818e2bbfd"
 
-IC_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/idea/ideaIC/242.18071-EAP-CANDIDATE-SNAPSHOT/ideaIC-242.18071-EAP-CANDIDATE-SNAPSHOT.zip"
+IC_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/idea/ideaIC/242.19533-EAP-CANDIDATE-SNAPSHOT/ideaIC-242.19533-EAP-CANDIDATE-SNAPSHOT.zip"
 
 http_archive(
     name = "intellij_ce_2024_2",
@@ -244,7 +244,7 @@ http_archive(
 )
 
 _ANDRIOD_PLUGIN_BUILD_FILE = """
-java_import(
+java_import(2989/559575
     name = "android",
     jars = glob(["android/lib/*.jar"]),
     visibility = ["//visibility:public"],
@@ -275,7 +275,7 @@ http_jar(
     url = PERFORMANCE_PLUGIN_241_URL,
 )
 
-PERFORMANCE_PLUGIN_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/performanceTesting/performance-testing/242.18071-EAP-CANDIDATE-SNAPSHOT/performance-testing-242.18071-EAP-CANDIDATE-SNAPSHOT.jar"
+PERFORMANCE_PLUGIN_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/performanceTesting/performance-testing/242.19533-EAP-CANDIDATE-SNAPSHOT/performance-testing-242.19533-EAP-CANDIDATE-SNAPSHOT.jar"
 
 http_jar(
     name = "performance_2024_2",
