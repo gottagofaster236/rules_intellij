@@ -153,14 +153,12 @@ http_archive(
 )
 
 # The plugin api for intellij_ce_2024_2. This is required to build IJwB and run integration tests.
-IC_242_SHA = "a20df4b2fb9c96a2943db019807d9e0da57c0db28544cbd7dbb3c40818e2bbfd"
-
 IC_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/idea/ideaIC/242.19533-EAP-CANDIDATE-SNAPSHOT/ideaIC-242.19533-EAP-CANDIDATE-SNAPSHOT.zip"
 
 http_archive(
     name = "intellij_ce_2024_2",
     build_file = "@rules_intellij//intellij_platform_sdk:BUILD.idea242",
-#    sha256 = IC_242_SHA,
+    integrity = "sha256-vCm6l5svbbpxeqz/+RHMn/PPTcVpnr7wjx3kYMJp8Ss=",
     url = IC_242_URL,
 )
 
@@ -244,7 +242,7 @@ http_archive(
 )
 
 _ANDRIOD_PLUGIN_BUILD_FILE = """
-java_import(2989/559575
+java_import(
     name = "android",
     jars = glob(["android/lib/*.jar"]),
     visibility = ["//visibility:public"],
@@ -280,4 +278,5 @@ PERFORMANCE_PLUGIN_242_URL = "https://www.jetbrains.com/intellij-repository/snap
 http_jar(
     name = "performance_2024_2",
     url = PERFORMANCE_PLUGIN_242_URL,
+    integrity = "sha256-f6s5iw1NG+wObH76HouGbRQqzuNw9cj+QGPV9M+GwRE="
 )
