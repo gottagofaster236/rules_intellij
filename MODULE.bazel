@@ -274,5 +274,5 @@ PERFORMANCE_PLUGIN_242_URL = "https://www.jetbrains.com/intellij-repository/snap
 http_jar(
     name = "performance_2024_2",
     url = PERFORMANCE_PLUGIN_242_URL,
-#    integrity = "sha256-f6s5iw1NG+wObH76HouGbRQqzuNw9cj+QGPV9M+GwRE="
+    integrity = "sha256-f6s5iw1NG+wObH76HouGbRQqzuNw9cj+QGPV9M+GwRE=",
 )
