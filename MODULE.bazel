@@ -25,7 +25,7 @@ use_repo(python, "python_3_12", "python_versions")
 
 bazel_dep(
     name = "rules_kotlin",
-    version = "1.9.5",
+    version = "1.9.6",
 )
 
 bazel_dep(
@@ -39,7 +39,7 @@ bazel_dep(
 )
 bazel_dep(
     name = "bazel_skylib",
-    version = "1.6.1",
+    version = "1.7.1",
 )
 
 bazel_dep(name = "rules_jvm_external", version = "6.1")
@@ -153,13 +153,13 @@ http_archive(
 )
 
 # The plugin api for intellij_ce_2024_2. This is required to build IJwB and run integration tests.
-IC_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/idea/ideaIC/242.19533-EAP-CANDIDATE-SNAPSHOT/ideaIC-242.19533-EAP-CANDIDATE-SNAPSHOT.zip"
+IC_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/idea/ideaIC/242.19533.56-EAP-SNAPSHOT/ideaIC-242.19533.56-EAP-SNAPSHOT.zip"
 
 http_archive(
     name = "intellij_ce_2024_2",
     build_file = "@rules_intellij//intellij_platform_sdk:BUILD.idea242",
-    integrity = "sha256-vCm6l5svbbpxeqz/+RHMn/PPTcVpnr7wjx3kYMJp8Ss=",
     url = IC_242_URL,
+    integrity = "sha256-iXdfBQl1Vt0PEL0i10GTswKr6W7GjVR4dRzAml7JZwM=",
 )
 
 DEVKIT_BUILD_FILE = """
@@ -182,8 +182,7 @@ http_archive(
 )
 
 #DEVKIT_242_SHA = "e6eb3d2409581f74dda654db30003f98c7913a17887ee9caf3aa7d551ed0a354"
-
-DEVKIT_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/DevKit/242.18071.24/DevKit-242.18071.24.zip"
+DEVKIT_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/DevKit/242.19533.56/DevKit-242.19533.56.zip"
 
 http_archive(
     name = "devkit_2024_2",
@@ -229,15 +228,12 @@ filegroup(
 )
 """
 
-PYTHON_PLUGIN_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/PythonCore/242.18071.24/PythonCore-242.18071.24.zip"
-
-#PYTHON_PLUGIN_242_SHA = "297463c5f43ff2e4410e071ff469a7d4a80e6a961bf6d4c7578a7065906c8181"
+PYTHON_PLUGIN_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/PythonCore/242.19533.56/PythonCore-242.19533.56.zip"
 
 http_archive(
     name = "python_2024_2",
     build_file_content = _PYTHON_CE_242_BUILD_FILE,
-    integrity = "sha256-UfD6t+/83M9ftyZ5KqqUK0UcOuwkpy93pqNgyuahgW8=",
-#    sha256 = PYTHON_PLUGIN_242_SHA,
+    integrity = "sha256-w9ApJLrfSeEQ1cRArG7jiJ7JL9x9h58dsqrYXEA2mro=",
     url = PYTHON_PLUGIN_242_URL,
 )
 
@@ -257,12 +253,12 @@ http_archive(
     url = ANDROID_PLUGIN_241_URL,
 )
 
-ANDROID_PLUGIN_242_URL = "https://downloads.marketplace.jetbrains.com/files/22989/559575/android-242.18071.24.zip"
+ANDROID_PLUGIN_242_URL = "https://downloads.marketplace.jetbrains.com/files/22989/564719/android-242.19533.56.zip"
 
 http_archive(
     name = "android_2024_2",
     build_file_content = _ANDRIOD_PLUGIN_BUILD_FILE,
-    integrity = "sha256-V6Aw4Ozx4DcRJ+iGqxvGneRoXY0ldgKLTe47/xtI6qw=",
+    integrity = "sha256-k6sPPCL+lS+zhboMOuonPqq8+kmmBKsBRvl5FVsUDMA=",
     url = ANDROID_PLUGIN_242_URL,
 )
 
@@ -273,10 +269,10 @@ http_jar(
     url = PERFORMANCE_PLUGIN_241_URL,
 )
 
-PERFORMANCE_PLUGIN_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/performanceTesting/performance-testing/242.19533-EAP-CANDIDATE-SNAPSHOT/performance-testing-242.19533-EAP-CANDIDATE-SNAPSHOT.jar"
+PERFORMANCE_PLUGIN_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/performanceTesting/performance-testing/242.19533.56-EAP-SNAPSHOT/performance-testing-242.19533.56-EAP-SNAPSHOT.jar"
 
 http_jar(
     name = "performance_2024_2",
     url = PERFORMANCE_PLUGIN_242_URL,
-    integrity = "sha256-f6s5iw1NG+wObH76HouGbRQqzuNw9cj+QGPV9M+GwRE="
+#    integrity = "sha256-f6s5iw1NG+wObH76HouGbRQqzuNw9cj+QGPV9M+GwRE="
 )

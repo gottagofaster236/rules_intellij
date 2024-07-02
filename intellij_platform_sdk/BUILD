@@ -1068,90 +1068,6 @@ java_library(
     ),
 )
 
-# IntelliJ maven plugin
-java_library(
-    name = "maven",
-    neverlink = 1,
-    exports = select_from_plugin_api_directory(
-        android_studio = [],
-        clion = [],
-        intellij = [":maven"],
-    ),
-)
-
-java_library(
-    name = "maven_for_tests",
-    testonly = 1,
-    exports = select_from_plugin_api_directory(
-        android_studio = [],
-        clion = [],
-        intellij = [":maven_bundled_plugins"],
-    ),
-)
-
-# IntelliJ maven model plugin
-java_library(
-    name = "maven_model",
-    neverlink = 1,
-    exports = select_from_plugin_api_directory(
-        android_studio = [],
-        clion = [],
-        intellij = [":maven_model"],
-    ),
-)
-
-java_library(
-    name = "maven_model_for_tests",
-    testonly = 1,
-    exports = select_from_plugin_api_directory(
-        android_studio = [],
-        clion = [],
-        intellij = [":maven_model"],
-    ),
-)
-
-# IntelliJ yaml plugin
-java_library(
-    name = "yaml",
-    neverlink = 1,
-    exports = select_from_plugin_api_directory(
-        android_studio = [],
-        clion = [],
-        intellij = [":yaml"],
-    ),
-)
-
-java_library(
-    name = "yaml_for_tests",
-    testonly = 1,
-    exports = select_from_plugin_api_directory(
-        android_studio = [],
-        clion = [],
-        intellij = [":yaml"],
-    ),
-)
-
-# IntelliJ gradle plugin
-java_library(
-    name = "gradle",
-    neverlink = 1,
-    exports = select_from_plugin_api_directory(
-        android_studio = [],
-        clion = [],
-        intellij = [":gradle"],
-    ),
-)
-
-java_library(
-    name = "gradle_for_tests",
-    testonly = 1,
-    exports = select_from_plugin_api_directory(
-        android_studio = [],
-        clion = [],
-        intellij = [":gradle"],
-    ),
-)
-
 # IntelliJ DatabaseTools plugin
 java_library(
     name = "database_tools",
@@ -1195,27 +1111,6 @@ java_library(
         clion = [],
         intellij = [],
         intellij_ue = [":javaee"],
-    ),
-)
-
-# IntelliJ Markdown plugin
-java_library(
-    name = "markdown",
-    neverlink = 1,
-    exports = select_from_plugin_api_directory(
-        android_studio = [],
-        clion = [],
-        intellij = [":markdown"],
-    ),
-)
-
-java_library(
-    name = "markdown_for_tests",
-    testonly = 1,
-    exports = select_from_plugin_api_directory(
-        android_studio = [],
-        clion = [],
-        intellij = [":markdown"],
     ),
 )
 
