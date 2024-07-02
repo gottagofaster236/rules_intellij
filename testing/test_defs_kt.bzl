@@ -249,16 +249,6 @@ def intellij_integration_test_suite(
 
     resources = kwargs.pop("resources", [])
 
-    native.genrule(
-        name = name + "_test_extension",
-        outs = ["test/resources/META-INF/services/org.junit.platform.launcher.TestExecutionListener"],
-        cmd = """
-        echo "com.google.idea.testing.IntellijJunit5TestExecutionListener" > $@
-        """,
-    )
-
-    resources.append(name + "_test_extension")
-
     prefs_name = name + "_prefs"
 
     generate_directory(
