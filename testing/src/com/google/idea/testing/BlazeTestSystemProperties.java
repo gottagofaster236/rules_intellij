@@ -45,7 +45,7 @@ public class BlazeTestSystemProperties {
   private static final String RUNFILES_PATH = TestUtils.getUserValue("TEST_SRCDIR");
 
   /** Sets up the necessary system properties for running IntelliJ tests via blaze/bazel. */
-  public static void configureSystemProperties() {
+  public static void configureSystemProperties(Disposable testSuiteParentDisposable) {
     File sandbox = new File(TestUtils.getTmpDirFile(), "_intellij_test_sandbox");
 
     setSandboxPath("idea.home.path", new File(sandbox, "home"));
@@ -79,8 +79,12 @@ public class BlazeTestSystemProperties {
 
     // Tests fail if they access files outside of the project roots and other system directories.
     // Ensure runfiles and platform api are allowed.
-    // Note: We want this access to be true for all tests so we don't dispose the disposable.
-    Disposable disposable = Disposer.newDisposable();
+    // Note: We want this access to be true for all tests so we don't dispose the disposable explicitly,
+    // but we need to dispose it at some point, otherwise application leak checker will be sad.
+    // Because of that it's registered as a child of some parent disposable which should be
+    // disposed once all the tests are finished. For example, application is a good choice: ApplicationManager.getApplication()
+    Disposable disposable = Disposer.newDisposable("BlazeTestSystemProperties#configureSystemProperties");
+    Disposer.register(testSuiteParentDisposable, disposable);
     VfsRootAccess.allowRootAccess(disposable, RUNFILES_PATH);
     String platformApi = getPlatformApiPath();
     if (platformApi != null) {
