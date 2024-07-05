@@ -233,6 +233,7 @@ def _add_dependencies_to_plugin_xml(ctx, input_plugin_xml_file, optional_plugin_
         args.extend(["--plugin_deps"])
         for module in plugin_deps:
             args.append(module)
+    args.append("--")
     for module in optional_plugin_deps:
         args.append(module)
         args.append(_filename_for_module_dependency(module))
@@ -291,7 +292,7 @@ _intellij_plugin_java_deps = rule(
 def _intellij_plugin_jar_impl(ctx):
     augmented_xml = _merge_plugin_xmls(ctx)
     optional_module_to_merged_xmls = _merge_optional_plugin_deps(ctx)
-    optional_modules = [k for k in optional_module_to_merged_xmls.keys() if not k.is_synthetic]
+    optional_modules = [k.name for k in optional_module_to_merged_xmls.keys() if not k.is_synthetic]
 
     modules = _merge_plugin_deps(ctx)
 
