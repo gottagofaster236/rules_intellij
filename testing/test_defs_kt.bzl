@@ -276,6 +276,7 @@ def intellij_integration_test_suite(
     main_class = kwargs.pop("main_class", "org.junit.platform.console.ConsoleLauncher")
 
     args = kwargs.pop("args", [])
+    args.append("--disable-banner")
     args.append("--select-class=" + test_package_root + "." + suite_class_name)
     args.append("--fail-if-no-tests")
     args.append("-e")
