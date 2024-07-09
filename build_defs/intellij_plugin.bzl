@@ -350,7 +350,7 @@ _intellij_plugin_jar = rule(
     },
 )
 
-def intellij_plugin(name, deps, plugin_xml, plugin_deps = [], optional_plugin_deps = [], jar_name = None, extra_runtime_deps = [], plugin_icons = [], restrict_deps = False, **kwargs):
+def intellij_plugin(name, deps, plugin_xml, plugin_deps = [], optional_plugin_deps = [], jar_name = None, extra_runtime_deps = [], plugin_icons = [], restrict_deps = False, deploy_env = [], **kwargs):
     """Creates an intellij plugin from the given deps and plugin.xml.
 
     Args:
@@ -374,6 +374,7 @@ def intellij_plugin(name, deps, plugin_xml, plugin_deps = [], optional_plugin_de
         name = binary_name,
         runtime_deps = [":" + java_deps_name] + extra_runtime_deps,
         create_executable = 0,
+        deploy_env = deploy_env,
     )
 
     if not ("testonly" in kwargs and kwargs["testonly"]):
