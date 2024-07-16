@@ -210,11 +210,7 @@ def main():
     else:
       with open(args.version_file) as f:
         version_value = f.read().strip()
-    # Since we may release different versions that target different plugin api
-    # versions simultaneously, we append the name of the api_version to the
-    # plugin version.
-    version_text = dom.createTextNode(version_value + "-api-version-" +
-                                      _parse_major_version(api_version))
+    version_text = dom.createTextNode(version_value)
     version_element.appendChild(version_text)
 
   if args.stamp_since_build or args.stamp_until_build:
