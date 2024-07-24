@@ -235,6 +235,25 @@ http_archive(
     url = PYTHON_PLUGIN_242_URL,
 )
 
+_GO_BUILD_FILE_242 = """
+java_import(
+    name = "go",
+    jars = glob(["go-plugin/lib/*.jar", "go-plugin/lib/modules/*.jar"]),
+    visibility = ["//visibility:public"],
+)
+"""
+
+GO_PLUGIN_242_SHA = "472b4aae006b17f5a6b9ef9a6fac425e386ef0bba19445dccdc4d7dfacbc2613"
+
+GO_PLUGIN_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/org.jetbrains.plugins.go/242.20224.91/org.jetbrains.plugins.go-242.20224.91.zip"
+
+http_archive(
+    name = "go_2024_2",
+    build_file_content = _GO_BUILD_FILE_242,
+    sha256 = GO_PLUGIN_242_SHA,
+    url = GO_PLUGIN_242_URL,
+)
+
 _ANDRIOD_PLUGIN_BUILD_FILE = """
 java_import(
     name = "android",
