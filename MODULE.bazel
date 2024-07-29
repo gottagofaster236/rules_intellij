@@ -180,12 +180,12 @@ http_archive(
     url = DEVKIT_241_URL,
 )
 
-DEVKIT_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/DevKit/242.20224.23/DevKit-242.20224.23.zip"
+DEVKIT_242_URL = "https://plugins.jetbrains.com/maven/com/jetbrains/plugins/DevKit/242.20224.159/DevKit-242.20224.159.zip"
 
 http_archive(
     name = "devkit_2024_2",
     build_file_content = DEVKIT_BUILD_FILE,
-    integrity = "sha256-uqnejRHJhQkaAfBoY90Fd2dBpcjQq5cq2NEnQSUbkXI=",
+    integrity = "sha256-gn7ypvLoBnC9qCfFlSwj3QDVyN9QAjj0O54YYMZikZ4=",
     url = DEVKIT_242_URL,
 )
 
