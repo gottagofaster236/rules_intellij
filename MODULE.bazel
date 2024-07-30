@@ -293,3 +293,11 @@ http_jar(
     url = PERFORMANCE_PLUGIN_242_URL,
     integrity = "sha256-P3lIU4P5/gh2ey6ds5QClEKtOSWhtzoleNSKz9QOcMs=",
 )
+
+REMOTE_DEV_242_URL = "https://www.jetbrains.com/intellij-repository/snapshots/com/jetbrains/intellij/rd/rd-client/242.20224-EAP-CANDIDATE-SNAPSHOT/rd-client-242.20224-EAP-CANDIDATE-SNAPSHOT.jar"
+
+http_jar(
+    name = "remote_dev_2024_2",
+    url = REMOTE_DEV_242_URL,
+    integrity = "sha256-ZPZFZU+3djMcenkpwseJuKg/S5djyWz3kbOpUbUW4T4=",
+)
